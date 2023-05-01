@@ -13,14 +13,22 @@ def mainMenu():
     elif int(choice) == 7: exit()
     mapName = input("What's the codename?: ")
     os.makedirs('output/'+mapName+'/', exist_ok=True)
-    #if int(choice) == 1: dlEverything(mapName)
-    if int(choice) == 2: dlAudio(mapName)
+    if int(choice) == 1: dlEverything(mapName)
+    elif int(choice) == 2: dlAudio(mapName)
     elif int(choice) == 3: dlBundle(mapName)
     elif int(choice) == 4: dlJson(mapName)
     elif int(choice) == 5: dlPictos(mapName)
     elif int(choice) == 6: dlTexture(mapName)
     if int(choice) < 7 and int(choice) > 1: input('\nThe file was downloaded! Press enter to continue')
     mainMenu()
+
+def dlEverything(SongName):
+    dlAudio(SongName)
+    dlBundle(SongName)
+    dlJson(SongName)
+    dlPictos(SongName)
+    dlTexture(SongName)
+    input('\nAll '+SongName+' files were downloaded!  Press enter to continue')
 
 def dlAudio(SongName):
     audioLink = 'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/'+SongName+'/assets/web/'+SongName+'.ogg'
