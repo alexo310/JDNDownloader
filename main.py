@@ -18,7 +18,7 @@ def mainMenu():
     elif int(choice) == 3: dlBundle(mapName)
     elif int(choice) == 4: dlJson(mapName)
     elif int(choice) == 5: dlPictos(mapName)
-    #elif int(choice) == 6: dlTextures(mapName)
+    elif int(choice) == 6: dlTexture(mapName)
     if int(choice) < 7 and int(choice) > 1: input('\nThe file was downloaded! Press enter to continue')
     mainMenu()
 
@@ -44,6 +44,16 @@ def dlPictos(SongName):
     cssLink = 'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/'+SongName+'/assets/web/pictos-sprite.css'
     css = requests.get(cssLink, allow_redirects=True)
     open('output/'+SongName+'/pictos-sprite.css', 'wb').write(css.content)
+
+def dlTexture(SongName):
+    squareLink = 'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/'+SongName+'/assets/web/'+SongName.lower()+'.jpg'
+    square = requests.get(squareLink, allow_redirects=True)
+    open('output/'+SongName+'/'+SongName.lower()+'_cover_generic.png', 'wb').write(square.content)
+    coachNum = ['1', '2', '3', '4']
+    for coachPng in coachNum:
+        coachLink = 'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/'+SongName+'/assets/common/coaches/'+SongName.lower()+'_coach_'+coachPng+'_big.png'
+        coach = requests.get(coachLink, allow_redirects=True)
+        open('output/'+SongName+'/'+SongName.lower()+'_coach_'+coachPng+'.png', 'wb').write(coach.content)
 
 def checkInt(varName,menuName):
     try: intValue = int(varName)
