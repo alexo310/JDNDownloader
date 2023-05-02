@@ -1,4 +1,4 @@
-# JDNDownloader Legacy by alexo
+#JDNDownloader Legacy by alexo
 **JDNDownloader Legacy** downloads files from the old Just Dance Now servers.
 ## Instructions
 - These instructions are for windows
@@ -7,10 +7,10 @@ Install python and run these commands on command prompt
   python -m pip install -U pip
   pip install requests
 ```
-### To-do
+###To-do
 - Make function so it deletes files that don't exist on the website
 
-## Features
+##Features
 | File Type | Availability |
 | ------------- | ------------- |
 | Audio Preview | ✅  |
