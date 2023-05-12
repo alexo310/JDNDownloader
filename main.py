@@ -23,7 +23,7 @@ def dlEverything(SongName):
     dlAudio(SongName)
     dlBundle(SongName)
     dlPictos(SongName)
-    input(f'\nAll {SongName} files were downloaded!  Press enter to continue')
+    input(f'\nAll {SongName} files were downloaded! Press enter to continue')
 
 def dlAudio(SongName):
     audioLink = f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{SongName}/assets/web/{SongName}.ogg'
@@ -44,7 +44,7 @@ def dlPictos(SongName):
     pictoLink = f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{SongName}/assets/web/pictos-sprite.png'
     picto = requests.get(pictoLink, allow_redirects=True)
     open(f'output/{SongName}/pictos-sprite.png', 'wb').write(picto.content)
-    cssLink = 'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{SongName}/assets/web/pictos-sprite.css'
+    cssLink = f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{SongName}/assets/web/pictos-sprite.css'
     css = requests.get(cssLink, allow_redirects=True)
     open(f'output/{SongName}/pictos-sprite.css', 'wb').write(css.content)
 
