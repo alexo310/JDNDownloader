@@ -40,9 +40,6 @@ def dlPictos(SongName):
     with requests.get(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{SongName}/assets/web/pictos-sprite.css', allow_redirects=True) as css: open(f'output/{SongName}/pictos-sprite.css', 'wb').write(css.content)
 
 def dlTexture(SongName):
-    with requests.get(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{SongName}/assets/web/{SongName.lower()}.jpg', allow_redirects=True) as square: open(f'output/{SongName}/{SongName.lower()}_cover_generic.png', 'wb').write(square.content)
-    coachNum = range(4)
-    for coachPng in coachNum:
-        with requests.get(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{SongName}/assets/common/coaches/{SongName.lower()}_coach_{str(coachPng+1)}_big.png', allow_redirects=True) as coach: open(f'output/{SongName}/{SongName.lower()}_coach_{str(coachPng+1)}.png', 'wb').write(coach.content)
+    print('Not Working')
 
 mainMenu()
