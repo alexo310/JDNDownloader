@@ -2,7 +2,11 @@
 import os, requests
 
 def mainMenu():
-    os.system('cls')
+    if(os.name == 'posix'):
+        os.system('clear')
+    else:
+        os.system('cls')
+
     print('\n- Just Dance Now Downloader Legacy\n---------------------------\n[1] Download Everything\n[2] Download Audio Preview\n[3] Download Bundle\n[4] Download Json\n[5] Download Pictos\n[6] Download Textures\n[7] Exit this script\n---------------------------')
     try: choice = int(input('Choose one of the above: '))
     except: mainMenu()
