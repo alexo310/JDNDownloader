@@ -1,15 +1,18 @@
-# JDNDownloader Legacy by alexo
-**JDNDownloader Legacy** downloads files from the old Just Dance Now servers.
+# JDNDownloader
+**JDNDownloader** downloads files from the Just Dance Now servers.
 ## Instructions
-- These instructions are for windows
-Install python and run these commands on command prompt
+Install python and run these commands on command prompt / terminal
 ```bash
   python -m pip install -U pip
   pip install requests
 ```
+Script usage
+```bash
+   prod = download maps file from current jdnow games
+   uat = download maps file from pre-prod jdnow games
+```
 ### To-do
-- Make function so it deletes files that don't exist on the website
-- Download newer bundles, if they exist
+- Download Files From Demo server
 
 ## Features
 | File Type | Availability |
