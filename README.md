@@ -1,22 +1,18 @@
-# JDNDownloader Legacy by alexo
-**JDNDownloader Legacy** downloads files from the old Just Dance Now servers.
+# JDNDownloader by alexo
+**JDNDownloader** downloads files from every Just Dance Now servers.
 ## Instructions
-- These instructions are for windows
-Install python and run these commands on command prompt
+To make this script work, open terminal and paste this:
 ```bash
-  python -m pip install -U pip
-  pip install requests
+  python -m pip install -U requests
 ```
-### To-do
-- Make function so it deletes files that don't exist on the website
-- Download newer bundles, if they exist
-
 ## Features
-| File Type | Availability |
+| Server | Codename |
 | ------------- | ------------- |
-| Audio Preview | ✅  |
-| Bundles | ✅ |
-| Json's | ✅ |
-| Pictograms | ✅ |
-| Previews | ✅ |
-| Textures | ✅ |
+| Demo Servers (2014-2015) (Not Available) | demo  |
+| Old Servers (2015-2017) | prod |
+| New Servers (2018-Present) | uat |
+
+### Credits
+SilencerGuy, JDEliott/MZommer - Giving tips on how to clean the code
+Kubabisi - Implement linux & mac cmd into the script
+ibratabian17 - Implement new server into the script
