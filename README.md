@@ -1,5 +1,5 @@
 # JDNDownloader by alexo
-**JDNDownloader** downloads files from every Just Dance Now servers.
+**JDNDownloader** downloads files from every Just Dance Now server.
 ## Instructions
 To make this script work, open terminal and paste this:
 ```bash
