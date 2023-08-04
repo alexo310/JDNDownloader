@@ -59,7 +59,7 @@ def url_files(mapname, mapurl, server, file):
     elif server == 'prod': url = prod_url[file]
     download(mapname, savedir, server, url)
 
-def get_files(choice, mapname, mapurl, server):
+def get_files(choice, mapname, mapurl='', server):
     if choice == 1: url_files(mapname, mapurl, server, 'audio')
     elif choice == 2: url_files(mapname, mapurl, server, 'bundle')
     elif choice == 3: url_files(mapname, mapurl, server, 'json')
@@ -94,7 +94,7 @@ Choose one of the above: '''))
     if server not in ['uat', 'prod']: main_menu()
     os.makedirs(f'output/{mapname}/', exist_ok=True)
     if server == 'uat':
-        get_files(choice, mapname,'', 'uat')
+        get_files(choice, mapname, server='uat')
     elif server == 'prod':
         with requests.get('https://sin-prod-api.justdancenow.com/v1/songs/published') as a:
             songdb = json.loads(a.content.decode('utf-8'))
