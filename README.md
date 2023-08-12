@@ -1,7 +1,7 @@
 # JDNDownloader by alexo
 **JDNDownloader** downloads files from every Just Dance Now server.
 ## Instructions
-To make this script work, open terminal and paste this:
+To make this script work, install Python. After installing, open terminal and paste this:
 ```bash
   python -m pip install -U requests
 ```
