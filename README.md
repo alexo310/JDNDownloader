@@ -13,6 +13,6 @@ To make this script work, open terminal and paste this:
 | New Servers (2018-Present) | uat |
 
 ### Credits
-SilencerGuy, JDEliott/MZommer - Giving tips on how to clean the code
+SilencerGuy, MZommer - Giving tips on how to clean the code
 Kubabisi - Implement linux & mac cmd into the script
 ibratabian17 - Implement new server into the script

@@ -59,7 +59,7 @@ def url_files(mapname, mapurl, server, file):
     elif server == 'prod': url = prod_url[file]
     download(mapname, savedir, server, url)
 
-def get_files(choice, mapname, mapurl='', server):
+def get_files(choice, mapname, server, mapurl=''):
     if choice == 1: url_files(mapname, mapurl, server, 'audio')
     elif choice == 2: url_files(mapname, mapurl, server, 'bundle')
     elif choice == 3: url_files(mapname, mapurl, server, 'json')
@@ -100,7 +100,7 @@ Choose one of the above: '''))
             songdb = json.loads(a.content.decode('utf-8'))
             selected_song = next((song for song in songdb if song.get('id') == mapname), None)
             print(f"Download {selected_song['base']}/{selected_song['id']}")
-            if selected_song: get_files(choice, selected_song['id'], selected_song['base'], 'prod')
+            if selected_song: get_files(choice, selected_song['id'], 'prod', selected_song['base'])
             else: input('Can\'t find codename')
     main_menu()
 
