@@ -11,16 +11,16 @@ def dlFile(url: str, output: str, isUat: bool = False) -> None:
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
     'sec-ch-ua-platform': 'Windows', 'Origin': 'https://justdancenow.com',
     'Referer': 'https://justdancenow.com/' }
-    os.makedirs(output, exist_ok=True)
     if isUat: response = requests.get(url, headers=headers, allow_redirects=False, stream=True)
     else: response = requests.get(url, allow_redirects=False, stream=True)
-    if response.status_code == 200 or response.status_code == 206:
+    if response.status_code == 403: print('access forbidden')    
+    elif response.status_code == 200 or response.status_code == 206:
+        os.makedirs(output, exist_ok=True)
         chunkSize = 1024
         with open(f'{output}\\{os.path.basename(url)}', 'wb') as file:
             print(f'Downloading {os.path.basename(url)}')
             for chunk in response.iter_content(chunk_size=chunkSize):
                 if chunk: file.write(chunk)             
-    elif response.status_code == 403: print('access forbidden')
     else: print(f'{os.path.basename(url)} is not available.')
 
 def demoDl(MapName: str) -> None:
@@ -31,11 +31,12 @@ def demoDl(MapName: str) -> None:
     dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/Umbrella.json', f'output/{MapName}/demo')
+    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/demo')
+    dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/dist/bundle/{MapName}.zip', f'output/{MapName}/demo/bundle')
     for i in range(3):
         dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/demo/assets')
         dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/demo/assets')
-        dlFile(f'{webPath}/data/moves/{MapName.lower()}_moves{i}.json', f'output/{MapName}/data/moves')
+        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/demo/data/moves')
 
 def prodDl(MapName: str) -> None:
     pass
