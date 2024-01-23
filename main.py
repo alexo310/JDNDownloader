@@ -5,7 +5,6 @@ def cls() -> None:
     if os.name == 'posix': os.system('clear')
     else: os.system('cls')
 
-
 def dlFile(url: str, output: str, isUat: bool = False):
     headers = { 'Accept': 'text/plain, */*; q=0.01', 'Accept-Encoding': 'gzip, deflate, br',
     'Connection': 'keep-alive', 'Host': 'jdnow-api-contentapistoragest.justdancenow.com',
@@ -30,13 +29,14 @@ def demoDl(MapName: str) -> None:
     print(f'''
 - downloading {MapName}
 ---------------------------''')
-    dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
-    dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
-    dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
-    dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets/web/{MapName}.ogg', f'output/{MapName}/demo/assets')
+    webPath = f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets'
+    dlFile(f'{webPath}/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/web/{MapName}.ogg', f'output/{MapName}/demo/assets')
     for i in range(3):
-        dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/demo/assets')
-        dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/demo/assets')
+        dlFile(f'{webPath}/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/demo/assets')
+        dlFile(f'{webPath}/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/demo/assets')
 
 def prodDl(MapName: str) -> None:
     pass
@@ -60,8 +60,6 @@ def main() -> None:
     codename = input('codename (ex: Umbrella)\n>>> ')
     functions[choice](codename)
     main()
-
-
 
 if __name__ == '__main__':
     main()
