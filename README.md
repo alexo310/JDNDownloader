@@ -8,9 +8,9 @@ To make this script work, install Python. After installing, open the folder on t
 ## Features
 | Server | Codename |
 | ------------- | ------------- |
-| Demo Servers (2014-2015) (Not Available) | demo  |
-| Old Servers (2015-2017) | prod |
-| New Servers (2018-Present) | uat |
+| Demo Servers (2014-2015) | demo  |
+| Old Servers (2015-2017) (Not Available) | prod |
+| New Servers (2018-Present) (Not Available) | uat |
 
 ### Credits
 SilencerGuy, MZommer - Giving tips on how to clean the code
