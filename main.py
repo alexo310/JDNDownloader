@@ -31,7 +31,7 @@ def demoDl(MapName: str) -> None:
     dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/demo')
+    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/demo/data')
     dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/dist/bundle/{MapName}.zip', f'output/{MapName}/demo/bundle')
     for i in range(3):
         dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/demo/assets')
