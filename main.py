@@ -5,7 +5,7 @@ def cls() -> None:
     if os.name == 'posix': os.system('clear')
     else: os.system('cls')
 
-def dlFile(url: str, output: str, isUat: bool = False):
+def dlFile(url: str, output: str, isUat: bool = False) -> None:
     headers = { 'Accept': 'text/plain, */*; q=0.01', 'Accept-Encoding': 'gzip, deflate, br',
     'Connection': 'keep-alive', 'Host': 'jdnow-api-contentapistoragest.justdancenow.com',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
@@ -17,26 +17,25 @@ def dlFile(url: str, output: str, isUat: bool = False):
     if response.status_code == 200 or response.status_code == 206:
         chunkSize = 1024
         with open(f'{output}\\{os.path.basename(url)}', 'wb') as file:
-            print(f'Downloading {os.path.basename(url)}', end='\r')
+            print(f'Downloading {os.path.basename(url)}')
             for chunk in response.iter_content(chunk_size=chunkSize):
                 if chunk: file.write(chunk)             
     elif response.status_code == 403: print('access forbidden')
     else: print(f'{os.path.basename(url)} is not available.')
-    return
 
 def demoDl(MapName: str) -> None:
     cls()
-    print(f'''
-- downloading {MapName}
----------------------------''')
-    webPath = f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}/assets'
-    dlFile(f'{webPath}/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/web/{MapName}.ogg', f'output/{MapName}/demo/assets')
+    print(f'\n- downloading {MapName}\n---------------------------')
+    webPath = f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}'
+    dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/Umbrella.json', f'output/{MapName}/demo')
     for i in range(3):
-        dlFile(f'{webPath}/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/demo/assets')
-        dlFile(f'{webPath}/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/demo/assets')
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/demo/assets')
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/demo/assets')
+        dlFile(f'{webPath}/data/moves/{MapName.lower()}_moves{i}.json', f'output/{MapName}/data/moves')
 
 def prodDl(MapName: str) -> None:
     pass
@@ -54,7 +53,7 @@ def main() -> None:
 [3] download files from the uat servers (2015-present)
 --------------------------------------
 >>> '''))
-    except: main()
+    except ValueError: main()
     if choice < 1 or choice > 3: main()
     functions = { 1: demoDl, 2: prodDl, 3: uatDl }
     codename = input('codename (ex: Umbrella)\n>>> ')
