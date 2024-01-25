@@ -13,14 +13,14 @@ def dlFile(url: str, output: str, isUat: bool = False) -> None:
     'Referer': 'https://justdancenow.com/' }
     if isUat: response = requests.get(url, headers=headers, allow_redirects=False, stream=True)
     else: response = requests.get(url, allow_redirects=False, stream=True)
-    if response.status_code == 403: print('access forbidden')    
+    if response.status_code == 403: print('Access Forbidden')    
     elif response.status_code == 200 or response.status_code == 206:
         os.makedirs(output, exist_ok=True)
         chunkSize = 1024
         with open(f'{output}\\{os.path.basename(url)}', 'wb') as file:
             print(f'Downloading {os.path.basename(url)}')
             for chunk in response.iter_content(chunk_size=chunkSize):
-                if chunk: file.write(chunk)             
+                if chunk: file.write(chunk)
     else: print(f'{os.path.basename(url)} is not available.')
 
 def demoDl(MapName: str) -> None:
@@ -29,6 +29,7 @@ def demoDl(MapName: str) -> None:
     webPath = f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}'
     dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/demo/data')
@@ -39,10 +40,24 @@ def demoDl(MapName: str) -> None:
         dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/demo/data/moves')
 
 def prodDl(MapName: str) -> None:
-    pass
+    cls()
+    print(f'\n- downloading {MapName}\n---------------------------')
+    webPath = f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{MapName}'
+    dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/prod/data')
+    dlFile(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/dist/bundle/{MapName}.zip', f'output/{MapName}/prod/bundle')
+    for i in range(7):
+        dlFile(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/dist/bundle/{MapName}_{i + 2}.zip', f'output/{MapName}/prod/bundle')
+    for i in range(3):
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/prod/assets')
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/prod/assets')
+        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/prod/data/moves')
 
 def uatDl(MapName: str) -> None:
-    pass
 
 def main() -> None:
     cls()
