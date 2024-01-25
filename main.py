@@ -84,9 +84,9 @@ def prodDl(MapName: str) -> None:
     dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/prod/data')
     dlFile(f'{webPath}/bundle.zip', f'output/{MapName}/prod/bundle')
     for i in range(4):
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/uat/assets')
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/uat/assets')
-        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/uat/data/moves')
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/prod/assets')
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/prod/assets')
+        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/prod/data/moves')
 
 def main() -> None:
     cls()
