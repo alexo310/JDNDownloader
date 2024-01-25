@@ -17,14 +17,8 @@ def getSongdb(MapName: str) -> dict:
 
 # code by ibratabian17
 # same as the other one.
-def dlFile(url: str, output: str, isRequest: bool = False) -> None:
-    headers = { 'Accept': 'text/plain, */*; q=0.01', 'Accept-Encoding': 'gzip, deflate, br',
-    'Connection': 'keep-alive', 'Host': 'jdnow-api-contentapistoragest.justdancenow.com',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-    'sec-ch-ua-platform': 'Windows', 'Origin': 'https://justdancenow.com',
-    'Referer': 'https://justdancenow.com/' }
-    if isRequest: response = requests.get(url, headers=headers, allow_redirects=False, stream=True)
-    else: response = requests.get(url, allow_redirects=False, stream=True)
+def dlFile(url: str, output: str) -> None:
+    response = requests.get(url, allow_redirects=False, stream=True)
     if response.status_code == 403: print('Access Forbidden')    
     elif response.status_code == 200 or response.status_code == 206:
         os.makedirs(output, exist_ok=True)
