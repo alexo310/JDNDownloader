@@ -58,6 +58,7 @@ def prodDl(MapName: str) -> None:
         dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/prod/data/moves')
 
 def uatDl(MapName: str) -> None:
+    pass
 
 def main() -> None:
     cls()
