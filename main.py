@@ -23,7 +23,8 @@ def dlFile(url: str, output: str, isRequest: bool = False) -> None:
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
     'sec-ch-ua-platform': 'Windows', 'Origin': 'https://justdancenow.com',
     'Referer': 'https://justdancenow.com/' }
-    response = requests.get(url, headers=headers, allow_redirects=False, stream=True)
+    if isRequest: response = requests.get(url, headers=headers, allow_redirects=False, stream=True)
+    else: response = requests.get(url, allow_redirects=False, stream=True)
     if response.status_code == 403: print('Access Forbidden')    
     elif response.status_code == 200 or response.status_code == 206:
         os.makedirs(output, exist_ok=True)
