@@ -38,6 +38,8 @@ def demoDl(MapName: str) -> None:
     dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/uat/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/demo/assets')
     dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/demo/data')
     dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/dist/bundle/{MapName}.zip', f'output/{MapName}/demo/bundle')
     for i in range(4):
@@ -54,6 +56,8 @@ def uatDl(MapName: str) -> None:
     dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/uat/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/uat/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/uat/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/uat/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/uat/assets')
     dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/uat/data')
     dlFile(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/dist/bundle/{MapName}.zip', f'output/{MapName}/uat/bundle')
     for i in range(8):
@@ -76,6 +80,8 @@ def prodDl(MapName: str) -> None:
     dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/prod/assets')
     dlFile(f'{webPath}/assets/web/pictos-atlas.png', f'output/{MapName}/prod/assets')
     dlFile(f'{webPath}/assets/web/pictos-atlas.json', f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/prod/assets')
     dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/prod/data')
     dlFile(f'{webPath}/bundle.zip', f'output/{MapName}/prod/bundle')
     for i in range(4):
