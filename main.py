@@ -23,7 +23,7 @@ def dlFile(url: str, output: str) -> None:
     elif response.status_code == 200 or response.status_code == 206:
         os.makedirs(output, exist_ok=True)
         chunkSize = 1024
-        with open(f'{output}\\{os.path.basename(url)}', 'wb') as file:
+        with open(f'{output}/{os.path.basename(url)}', 'wb') as file:
             print(f'Downloading {os.path.basename(url)}')
             for chunk in response.iter_content(chunk_size=chunkSize):
                 if chunk: file.write(chunk)
