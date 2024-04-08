@@ -9,10 +9,11 @@ def cls() -> None:
 # code by ibratabian17
 # i do not know what this does, but it works!
 def getSongdb(MapName: str) -> dict:
-    with requests.get('https://sin-prod-api.justdancenow.com/v1/songs/published') as a:
-            songdb = a.content.decode('utf-8')
-            songdb = json.loads(songdb)
-            selectedSong = next((song for song in songdb if song.get('id') == MapName), None)
+    if not os.path.exists('./songdb.json'):
+        with requests.get('https://sin-prod-api.justdancenow.com/v1/songs/published') as songdb:
+            open('songdb.json', 'wb').write(songdb.content)
+    songdb = json.loads('./songdb.json')
+    selectedSong = next((song for song in songdb if song.get('id') == MapName), None)
     return selectedSong
 
 # code by ibratabian17
@@ -29,65 +30,36 @@ def dlFile(url: str, output: str) -> None:
                 if chunk: file.write(chunk)
     else: print(f'{os.path.basename(url)} is not available.')
 
-def demoDl(MapName: str) -> None:
+def serverDl(MapName: str, Server: str) -> None:
     cls()
     print(f'\n- downloading {MapName}\n---------------------------')
-    webPath = f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}'
-    dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/demo/assets')
-    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/demo/data')
-    dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/dist/bundle/{MapName}.zip', f'output/{MapName}/demo/bundle')
+    if Server == 'prod': songInfo = getSongdb(MapName)
+    servers = {
+        'demo': f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}',
+        'uat': f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{MapName}',
+        'prod': songInfo['base']
+    }
+    webPath = servers[Server]
+    if Server == 'prod': dlFile(songInfo['bkg_image'], f'output/{MapName}/prod/assets')
+    dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/{Server}/data')
+    match Server:
+        case 'demo': dlFile(f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/dist/bundle/{MapName}.zip', f'output/{MapName}/demo/bundle')
+        case 'uat': dlFile(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/dist/bundle/{MapName}.zip', f'output/{MapName}/{Server}/bundle')
+        case 'prod': dlFile(f'{webPath}/bundle.zip', f'output/{MapName}/prod/bundle')
+    if Server == 'uat':
+        for i in range(9):
+            dlFile(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/dist/bundle/{MapName}_{i+1}.zip', f'output/{MapName}/{Server}/bundle')
     for i in range(4):
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/demo/assets')
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/demo/assets')
-        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/demo/data/moves')
-
-def uatDl(MapName: str) -> None:
-    cls()
-    print(f'\n- downloading {MapName}\n---------------------------')
-    webPath = f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{MapName}'
-    dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/uat/assets')
-    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/uat/data')
-    dlFile(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/dist/bundle/{MapName}.zip', f'output/{MapName}/uat/bundle')
-    for i in range(8):
-        dlFile(f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/dist/bundle/{MapName}_{i + 2}.zip', f'output/{MapName}/uat/bundle')
-    for i in range(4):
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/uat/assets')
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/uat/assets')
-        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/uat/data/moves')
-
-def prodDl(MapName: str) -> None:
-    cls()
-    print(f'\n- downloading {MapName}\n---------------------------')
-    songInfo = getSongdb(MapName)
-    webPath = songInfo['base']
-    dlFile(songInfo['bkg_image'], f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/web/pictos-atlas.png', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/web/pictos-atlas.json', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/prod/assets')
-    dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/prod/data')
-    dlFile(f'{webPath}/bundle.zip', f'output/{MapName}/prod/bundle')
-    for i in range(4):
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/prod/assets')
-        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/prod/assets')
-        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/prod/data/moves')
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}_big.png', f'output/{MapName}/{Server}/assets')
+        dlFile(f'{webPath}/assets/common/coaches/{MapName.lower()}_coach_{i + 1}.png', f'output/{MapName}/{Server}/assets')
+        dlFile(f'{webPath}/data/moves/{MapName}_moves{i}.json', f'output/{MapName}/{Server}/data/moves')
 
 def main() -> None:
     cls()
@@ -101,9 +73,9 @@ def main() -> None:
 >>> '''))
     except ValueError: main()
     if choice < 1 or choice > 3: main()
-    functions = { 1: demoDl, 2: uatDl, 3: prodDl }
+    functions = { 1: 'demo', 2: 'uat', 3: 'prod' }
     codename = input('codename (ex: Umbrella)\n>>> ')
-    functions[choice](codename)
+    serverDl(codename, functions[choice])
     main()
 
 if __name__ == '__main__':
