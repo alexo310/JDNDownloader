@@ -9,10 +9,10 @@ def cls() -> None:
 # code by ibratabian17
 # i do not know what this does, but it works!
 def getSongdb(MapName: str) -> dict:
-    if not os.path.exists('./songdb.json'):
+    if not os.path.exists('./prodSongdb.json'):
         with requests.get('https://sin-prod-api.justdancenow.com/v1/songs/published') as songdb:
-            open('songdb.json', 'wb').write(songdb.content)
-    songdb = json.loads('./songdb.json')
+            open('prodSongdb.json', 'wb').write(songdb.content)
+    songdb = json.load(open('prodSongdb.json', encoding="utf8"))
     selectedSong = next((song for song in songdb if song.get('id') == MapName), None)
     return selectedSong
 
@@ -40,7 +40,7 @@ def serverDl(MapName: str, Server: str) -> None:
         'prod': songInfo['base']
     }
     webPath = servers[Server]
-    if Server == 'prod': dlFile(songInfo['bkg_image'], f'output/{MapName}/prod/assets')
+    if Server == 'prod': dlFile(songInfo['bkg_image'], f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/{Server}/assets')
@@ -72,8 +72,8 @@ def main() -> None:
 --------------------------------------
 >>> '''))
     except ValueError: main()
-    if choice < 1 or choice > 3: main()
-    functions = { 1: 'demo', 2: 'uat', 3: 'prod' }
+    if choice < 1 or choice > 4: main()
+    functions = { 1: 'demo', 2: 'uat', 3: 'prod'}
     codename = input('codename (ex: Umbrella)\n>>> ')
     serverDl(codename, functions[choice])
     main()
