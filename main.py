@@ -12,7 +12,7 @@ def getSongdb(MapName: str) -> dict:
     if not os.path.exists('./prodSongdb.json'):
         with requests.get('https://sin-prod-api.justdancenow.com/v1/songs/published') as songdb:
             open('prodSongdb.json', 'wb').write(songdb.content)
-    songdb = json.load(open('prodSongdb.json', encoding="utf8"))
+    songdb = json.load(open('prodSongdb.json'))
     selectedSong = next((song for song in songdb if song.get('id') == MapName), None)
     return selectedSong
 
@@ -33,11 +33,10 @@ def dlFile(url: str, output: str) -> None:
 def serverDl(MapName: str, Server: str) -> None:
     cls()
     print(f'\n- downloading {MapName}\n---------------------------')
-    if Server == 'prod': songInfo = getSongdb(MapName)
     servers = {
         'demo': f'https://static2.cdn.ubi.com/rio/prod/20140826_1330/songs/{MapName}',
         'uat': f'https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740/songs/{MapName}',
-        'prod': songInfo['base']
+        'prod': getSongdb(MapName)['base'] if Server == 'prod' else ''
     }
     webPath = servers[Server]
     if Server == 'prod': dlFile(songInfo['bkg_image'], f'output/{MapName}/{Server}/assets')
