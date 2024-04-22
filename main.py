@@ -12,7 +12,7 @@ def getSongdb(MapName: str) -> dict:
     if not os.path.exists('./prodSongdb.json'):
         with requests.get('https://sin-prod-api.justdancenow.com/v1/songs/published') as songdb:
             open('prodSongdb.json', 'wb').write(songdb.content)
-    songdb = json.load(open('prodSongdb.json'))
+    songdb = json.load(open('prodSongdb.json', encoding='utf8'))
     selectedSong = next((song for song in songdb if song.get('id') == MapName), None)
     return selectedSong
 
@@ -39,7 +39,7 @@ def serverDl(MapName: str, Server: str) -> None:
         'prod': getSongdb(MapName)['base'] if Server == 'prod' else ''
     }
     webPath = servers[Server]
-    if Server == 'prod': dlFile(songInfo['bkg_image'], f'output/{MapName}/{Server}/assets')
+    if Server == 'prod': dlFile(getSongdb(MapName)['bkg_image'], f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/{MapName}.ogg', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/{MapName.lower()}.jpg', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/{Server}/assets')
