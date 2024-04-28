@@ -45,6 +45,8 @@ def serverDl(MapName: str, Server: str) -> None:
     dlFile(f'{webPath}/assets/web/{MapName.lower()}_small.jpg', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.png', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/web/pictos-sprite.css', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/web/pictos-atlas.png', f'output/{MapName}/{Server}/assets')
+    dlFile(f'{webPath}/assets/web/pictos-atlas.json', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover.jpg', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/assets/app/{MapName.lower()}_cover%402x.jpg', f'output/{MapName}/{Server}/assets')
     dlFile(f'{webPath}/{MapName}.json', f'output/{MapName}/{Server}/data')
