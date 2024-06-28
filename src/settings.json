@@ -1,0 +1,25 @@
+{
+    "servers": {
+        "demo": {
+            "cdnLink": "https://static2.cdn.ubi.com/rio/prod/20140826_1330",
+            "description": "servers used for the demo version of jdn (2014-2015)"
+            
+        },
+        "uat": {
+            "cdnLink": "https://jdnowweb-s.cdn.ubi.com/uat/release_tu2/20150928_1740",
+            "description": "servers used for the old version of jdn (2015-2017)"
+        },
+        "prod": {
+            "cdnLink": "https://jdnow-api-contentapistoragest.justdancenow.com",
+            "description": "servers used for the new version of jdn (2018-present)",
+            "isProdBased": true,
+            "songdbLink": "https://sin-prod-api.justdancenow.com/v1/songs/published"
+        },
+        "rama": {
+            "cdnLink": "https://cdn.justdancenowplus.ru",
+            "description": "fan server used for just dance now+ developed by rama",
+            "isProdBased": true,
+            "songdbLink": "https://api.justdancenowplus.ru/v1/songs/published"
+        }
+    }
+}
