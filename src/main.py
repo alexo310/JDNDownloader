@@ -16,7 +16,10 @@ class Download:
                     codes[song['id']] = song['base'].split('_')[-1]
                 json.dump(codes, open(f'{self.serverName}Codes.json', 'w'))
         songdb = json.load(open(f'{self.serverName}Codes.json', encoding='utf8'))
-        return f'{codename}_{songdb[codename]}'
+        try: return f'{codename}_{songdb[codename]}'
+        except:
+            input('song not found. returning to main menu.')
+            main()
 
     @staticmethod
     def download(url: str, output: str) -> None:
