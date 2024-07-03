@@ -24,19 +24,20 @@ class Download:
     @staticmethod
     def download(url: str, output: str) -> None:
         response = requests.get(url, allow_redirects=False, stream=True)
-        match response.status_code:
-            case 403: print('access forbidden')
-            case 200 | 206:
-                os.makedirs(output, exist_ok=True)
-                with open(f'{output}/{os.path.basename(url)}', 'wb') as file:
-                    print(f'Downloading {os.path.basename(url)}')
-                    file.write(response.content)
-            case _: print(f'{os.path.basename(url)} is not available.')
+        statusCode = response.status_code
+        if statusCode == 403: print('access forbidden')
+        elif statusCode in [200, 206]:
+            os.makedirs(output, exist_ok=True)
+            with open(f'{output}/{os.path.basename(url)}', 'wb') as file:
+                print(f'Downloading {os.path.basename(url)}')
+                file.write(response.content)
+        else: print(f'{os.path.basename(url)} is not available.')
 
     def main(self, server: dict[str|bool]) -> None:
         clear()
         self.cdnLink: str = server['cdnLink']
         self.download(f'{self.cdnLink}/songs/{self.codename}/assets/web/{self.codename.split("_")[0]}.ogg', f'output/{self.codename.split("_")[0]}/assets')
+        self.download(f'{self.cdnLink}/songs/{self.codename}/assets/web/{self.codename.split("_")[0]}.mp3', f'output/{self.codename.split("_")[0]}/assets')
         self.download(f'{self.cdnLink}/songs/{self.codename}/assets/web/{self.codename.split("_")[0].lower()}.jpg', f'output/{self.codename.split("_")[0]}/assets')
         self.download(f'{self.cdnLink}/songs/{self.codename}/assets/web/{self.codename.split("_")[0].lower()}_small.jpg', f'output/{self.codename.split("_")[0]}/assets')
         self.download(f'{self.cdnLink}/songs/{self.codename}/assets/web/pictos-sprite.png', f'output/{self.codename.split("_")[0]}/assets')
