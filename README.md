@@ -19,7 +19,8 @@ Add a new item to the servers list in settings.json
 | cdnLink* | str | Link to the server |
 | description* | str | Self-explanatory |
 | isProdBased | bool | Tells the script if it needs an id |
-| songdbLink | str | Link to the server if it's prod based |
+| jdnsLink | str | Link to the server that will give us the cookies if it's prod based |
+| songdbLink | str | Link to the server that will give us the songdb if it's prod based |
 
 **Note:** You'll need to know how json files work to understand this.
 

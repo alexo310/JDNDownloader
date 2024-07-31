@@ -13,6 +13,7 @@
             "cdnLink": "https://jdnow-api-contentapistoragest.justdancenow.com",
             "description": "servers used for the new version of jdn (2018-present)",
             "isProdBased": true,
+            "jdnsLink": "https://sin-prod-jdns.justdancenow.com",
             "songdbLink": "https://sin-prod-api.justdancenow.com/v1/songs/published"
         }
     }
