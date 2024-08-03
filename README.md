@@ -24,6 +24,6 @@ Add a new item to the servers list in settings.json
 
 **Note:** You'll need to know how json files work to understand this.
 
-### Credits
-- Kubabisi - Implement linux & mac cmd into the script
-- ibratabian17 - Implement new server into the script
+## Credits
+- Kubabisi - Implement linux & mac terminal command into the script
+- ibratabian17 - Implement songdb functionality into the script
