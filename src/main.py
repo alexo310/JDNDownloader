@@ -63,7 +63,7 @@ class Download:
             with requests.get(f'{server["jdnsLink"]}/getPreviewVideo?song={self.codename.split("_")[0]}', headers={'x-platform': 'web'}) as cookies:
                 self.download(json.loads(cookies.content)['url'], f'output/{self.codename.split("_")[0]}/video')
         except:
-            print(f'jdns server is not available.')
+            print(f'jdns server or video is not available.')
 
     def uat(self, server: dict[str|bool], serverName: str):
         self.codename: str = input('\ncodename:\n>>> ')
