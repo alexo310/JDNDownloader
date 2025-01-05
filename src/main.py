@@ -10,11 +10,10 @@ class Download:
 
     def getSongdb(self, codename: str, url: str) -> str:
         if not os.path.exists(f'{self.serverName}Codes.json'):
-            with requests.get(url) as songdb:
-                codes = {}
-                for song in json.loads(songdb.content):
-                    codes[song['id']] = song['base'].split('_')[-1]
-                json.dump(codes, open(f'{self.serverName}Codes.json', 'w'))
+            codes = {}
+            for song in json.loads(requests.get(url).content):
+                codes[song['id']] = song['base'].split('_')[-1]
+            json.dump(codes, open(f'{self.serverName}Codes.json', 'w'))
         songdb = json.load(open(f'{self.serverName}Codes.json', encoding='utf8'))
         try: return f'{codename}_{songdb[codename]}'
         except:
