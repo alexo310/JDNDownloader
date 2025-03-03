@@ -21,7 +21,7 @@ Add a new item to the servers list in settings.json
 | isProdBased | bool | Tells the script if it needs an id |
 | jdnsLink | str | Link to the server that will give us the cookies if it's prod based |
 | songdbLink | str | Link to the server that will give us the songdb if it's prod based |
-TODO: Make the script be able to get the songdb link through the query
+
 **Note:** You'll need to know how json files work to understand this.
 
 ## UAT Sever
