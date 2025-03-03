@@ -9,7 +9,7 @@ To make this script work, install Python. After installing, open the folder on t
 | Server | Codename |
 | ------------- | ------------- |
 | Demo Servers (2014-2015) | demo  |
-| Old Servers (2015-2017) | uat |
+| ~~Old Servers (2015-2017)~~ | ~~uat~~ |
 | New Servers (2018-Present) | prod |
 
 ## How to add a new server
@@ -21,8 +21,11 @@ Add a new item to the servers list in settings.json
 | isProdBased | bool | Tells the script if it needs an id |
 | jdnsLink | str | Link to the server that will give us the cookies if it's prod based |
 | songdbLink | str | Link to the server that will give us the songdb if it's prod based |
-
+TODO: Make the script be able to get the songdb link through the query
 **Note:** You'll need to know how json files work to understand this.
+
+## UAT Sever
+In early 2025, Ubisoft started wiping the 2015-2017 servers and, unfortunately, most songs were not properly archived. In the bundles folder, there'll be zipped bundles of the songs that could be saved.
 
 ## Credits
 - Kubabisi - Implement linux & mac terminal command into the script
