@@ -1,5 +1,8 @@
 # JDNDownloader by alexo
-**JDNDownloader** downloads files from every (and any) Just Dance Now server.
+**JDNDownloader** downloads files from *almost* every (and any) Just Dance Now server.
+
+> **Note**: No more work has been done on this project for two years now. The last version should work with the new versions of JDN but there might be assets missing. Adding them to the script shouldn't be a problem if you know python.
+
 ## Instructions
 To make this script work, install Python. After installing, open the folder on terminal and paste this:
 ```bash
