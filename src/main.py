@@ -104,13 +104,13 @@ def main():
     for ind, server in enumerate(settings['servers']):
         print(f'[{ind+1}] {server["name"]} - {server['description']}')
     print('[0] exit this script\n' + '-' * 50)
-    if True: #try:
+    try:
         choice = int(input('choose a number associated with an option\n>>> '))
         if choice > 0 and choice <= len(settings['servers']):
             MapName = input('\ninsert the codename here:\n>>> ')
             Downloader(MapName, **settings['servers'][choice-1])
         elif choice == 0: exit()
-    #except: input('that choice isn\'t available')
+    except: input('that choice isn\'t available')
     main()
 
 if __name__ == '__main__':
